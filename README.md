@@ -71,8 +71,8 @@ These determine how long pallets occupy each station, how long blocking lasts, a
   - Unload station
   - Intermediate conveyor positions
 - Slot colors indicate state, for example:
-  - **Green** – OK / successfully tested
-  - **Yellow/Orange** – in process or waiting
+  - **Green** – Denoted Test Stations
+  - **Yellow/Orange** – Break In Stations/ Loading Stations
   - **Red** – blocked/faulted (no valid path or collision)
 
 If a pallet can’t move forward because of another pallet or a busy station:
