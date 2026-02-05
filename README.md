@@ -121,7 +121,7 @@ The focus is on **core concurrency and visualization**, not external IO or persi
 - Windows
 - **Visual Studio** (2022 or similar) with:
   - “.NET desktop development” workload installed
-- Classic **.NET Framework** (see `ProductionSimulator.csproj` for the exact version)
+- **.NET Framework** (see `ProductionSimulator.csproj` for the exact version)
 
 ### Clone and Run
 
