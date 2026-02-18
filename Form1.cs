@@ -122,7 +122,7 @@ namespace ProductionSimulator
         private int AllPalletsAdded = 0;
         private int MaxPalletsAdded = 0;
         private Color DefaultColorBreakin = Color.Yellow;
-        private Color DefaultColorTester = Color.Green;
+        private Color DefaultColorTester = Color.LightGreen;
         private Color DefaultColorLoading = Color.Orange;
         private Color DefaultColorOthers = Color.White;
 
