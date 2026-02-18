@@ -44,7 +44,9 @@ namespace ProductionSimulator
             {"T2",0 }, //Test Station 2 Index Time
             {"T3",0 }, //Test Station 3 Index Time
             {"UL",0 }, //Unload station Time code dictionary map
-            {"LD",0 }  //load station Time code dictionary map
+            {"LD",0 },
+            {"T4",0 },
+            {"T5",0 }//load station Time code dictionary map
         };
 
 
