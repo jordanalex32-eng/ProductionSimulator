@@ -55,6 +55,7 @@ namespace ProductionSimulator
             private static long b_counter;     // shared test counter (0,1,2,...)
             private static long o_counter;     // shared test counter (0,1,2,...)
             private static long ok_counter;
+            private static long nok_counter;
             public static (long countBefore, bool shouldFail) FlagAndEvaluateTester(int passPercent)
             {
                 long countBefore = Interlocked.Increment(ref s_counter) - 1; // capture BEFORE this test
@@ -80,6 +81,12 @@ namespace ProductionSimulator
                 OkCountChanged?.Invoke(after); // notify subscribers
                 return after;
             }
+            public static long IncrementNOk()
+            {
+                long after = Interlocked.Increment(ref nok_counter); // capture BEFORE this test
+                NOkCountChanged?.Invoke(after); // notify subscribers
+                return after;
+            }
             public static bool ShouldFail(int passPercent, long countBefore)
             {
                 // Bounds
@@ -100,9 +107,12 @@ namespace ProductionSimulator
             public static long ReadOutputCount() => Interlocked.Read(ref o_counter);
             public static void ResetOk() => Interlocked.Exchange(ref ok_counter, 0);
             public static long ReadOk() => Interlocked.Read(ref ok_counter);
+            public static void ResetNOk() => Interlocked.Exchange(ref ok_counter, 0);
+            public static long ReadMOk() => Interlocked.Read(ref nok_counter);
 
             public static event Action<long>? OutputCountChanged;
             public static event Action<long>? OkCountChanged;
+            public static event Action<long>? NOkCountChanged;
         }
 
         private volatile  bool OnBreak = false;
