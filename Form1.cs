@@ -55,6 +55,7 @@ namespace ProductionSimulator
             private static long b_counter;     // shared test counter (0,1,2,...)
             private static long o_counter;     // shared test counter (0,1,2,...)
             private static long ok_counter;
+            private static int _currentPriority;
             public static (long countBefore, bool shouldFail) FlagAndEvaluateTester(int passPercent)
             {
                 long countBefore = Interlocked.Increment(ref s_counter) - 1; // capture BEFORE this test
@@ -83,7 +84,7 @@ namespace ProductionSimulator
             public static bool ShouldFail(int passPercent, long countBefore)
             {
                 // Bounds
-                if (passPercent >= 100) return false; // never fail
+                if (passPercent >= N) return false; // never fail
                 if (passPercent <= 0) return true;  // always fail
 
                 int F = N - passPercent;              // fails per 100
@@ -99,6 +100,14 @@ namespace ProductionSimulator
             public static void ResetOutput() => Interlocked.Exchange(ref o_counter, 0);
             public static long ReadOutputCount() => Interlocked.Read(ref o_counter);
             public static void ResetOk() => Interlocked.Exchange(ref ok_counter, 0);
+            public static void ResetOkOnPriority(int priority) //Added method to track the priority reset count on oks
+            {
+                if (_currentPriority < priority) 
+                { 
+                    Interlocked.Exchange(ref ok_counter, 0);
+                    _currentPriority = priority;
+                }
+            }
             public static long ReadOk() => Interlocked.Read(ref ok_counter);
 
             public static event Action<long>? OutputCountChanged;
